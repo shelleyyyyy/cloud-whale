@@ -19,7 +19,7 @@
         <ul class="menu menu-horizontal px-1">
             <li><a href="/app/machines">Machines</a></li>
             <li><a href="/app/create">Create</a></li>
-            <button on:click={logout} class="btn btn-outline">Logout</button>
+            <button on:click={logout} class="btn">Logout</button>
         </ul>
     </div>
 </div>
