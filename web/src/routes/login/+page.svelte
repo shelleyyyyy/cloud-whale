@@ -22,7 +22,7 @@
         console.log("handle error")
       }).then(() => {
         if(pb.authStore.isValid){
-          goto("/app/feed")
+          goto("/app")
         } else {
           failedLogin = true
         }
