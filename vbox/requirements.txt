@@ -6,5 +6,6 @@ itsdangerous==2.1.2
 Jinja2==3.1.2
 MarkupSafe==2.1.2
 pyvbox==2.1.1
+virtualbox==2.1.1
 Werkzeug==2.2.3
 zipp==3.13.0
