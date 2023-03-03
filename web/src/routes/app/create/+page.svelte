@@ -2,6 +2,8 @@
 
     let loading = false;
 
+    
+
 </script>
 
 <h1 class="text-3xl font-bold text-center p-5 pb-10">Create New Machine</h1>

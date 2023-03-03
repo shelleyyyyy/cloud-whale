@@ -1,26 +1,78 @@
 
 <script>
 
-    const machines = [
-        {
-            "name": "Kali Test",
-            "image": "Kali Linux",
-            "ip": "192.168.0.1",
-            "state": "off"
-        },
-        {
-            "name": "Ubuntu Test",
-            "image": "Ubuntu 22.04",
-            "ip": "192.168.0.2",
-            "state": "on"
-        },
-        {
-            "name": "Cent Test",
-            "image": "Cent OS",
-            "ip": "192.168.0.3",
-            "state": "off"
-        }
-    ]
+    import { onMount } from 'svelte'
+
+    let machines = [];
+    // const machines = [
+    //     {
+    //         "name": "Kali Test",
+    //         "image": "Kali Linux",
+    //         "ip": "192.168.0.1",
+    //         "state": "off"
+    //     },
+    //     {
+    //         "name": "Ubuntu Test",
+    //         "image": "Ubuntu 22.04",
+    //         "ip": "192.168.0.2",
+    //         "state": "on"
+    //     },
+    //     {
+    //         "name": "Cent Test",
+    //         "image": "Cent OS",
+    //         "ip": "192.168.0.3",
+    //         "state": "off"
+    //     }
+    // ]
+
+	onMount(async () => {
+		const res = await fetch(`http://localhost:5000/list`);
+		machines = await res.json();
+        console.log(machines)
+	});
+
+    
+
+    const startMachine = async (id) => {
+        fetch("http://localhost:5000/startvm", {
+            method: "POST", // or 'PUT'
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                "id": id
+            }),
+        })
+        .then((data) => {
+            console.log("Success:", data);
+        })
+        .catch((error) => {
+            console.error("Error:", error);
+        });
+
+    }
+
+    const stopMachine = async (id) => {
+        fetch("http://localhost:5000/stopvm", {
+            method: "POST", // or 'PUT'
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                "id": id
+            }),
+        })
+        .then((data) => {
+            console.log("Success:", data);
+        })
+        .catch((error) => {
+            console.error("Error:", error);
+        });
+
+    }
+    
+
+
 
 </script>
 
@@ -33,8 +85,8 @@
         <thead>
             <tr>
             <th>Name</th>
-            <th>Image</th>
-            <th>IP</th>
+            <th>ID</th>
+            <!-- <th>IP</th> -->
             <th>State</th>
             <th>Actions</th>
             </tr>
@@ -44,24 +96,24 @@
             {#each machines as m}
                 <tr>
                     <td>
-                        {m.name}
+                        {m.title}
                     </td>
                     <td>
-                        {m.image}
+                        {m.id}
                     </td>
-                    <td>
+                    <!-- <td>
                         {m.ip}
-                    </td>
+                    </td> -->
                     <td>
                         {m.state}
-                    </td>
+                    </td> 
                     <th>
-                        {#if m.state == "on"}
-                            <button class="btn btn-outline btn-warning btn-xs">stop</button>
-                        {:else}
-                            <button class="btn btn-outline btn-success btn-xs">start</button>
-                        {/if}
-                        <button class="mx-5 btn btn-outline btn-error btn-xs">remove</button>
+                        <!-- {#if m.state == "on"} -->
+                            <button on:click={stopMachine(m.id)} class="btn btn-outline btn-warning btn-xs">stop</button>
+                        <!-- {:else} -->
+                            <button on:click={startMachine(m.id)} class="btn btn-outline btn-success btn-xs">start</button>
+                        <!-- {/if} -->
+                        <!-- <button class="mx-5 btn btn-outline btn-error btn-xs">remove</button> -->
                     </th>
                 </tr>
             {/each}
