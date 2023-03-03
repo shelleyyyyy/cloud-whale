@@ -62,4 +62,11 @@ def create_vm():
     os.system(import_command)
     return "creating"
 
-    
+@app.route("/deletevm", methods=['POST'])
+def delete_vm():
+    print(request.json)
+    os_name = request.json['os']
+    name = request.json['name']
+    delete_command = "VBoxManage unregistervm --delete /home/cole/VirtualBox\ VMs/{1}/{2}.vbox".format(os_name, name, name)
+    os.system(delete_command)
+    return "deleting"
