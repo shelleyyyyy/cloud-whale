@@ -1,7 +1,8 @@
 
 <script>
-
+    import { pb } from '../../../lib/pocketbase'
     import { onMount } from 'svelte'
+    import Actions from '../../../lib/Actions.svelte';
 
     let machines = [];
     // const machines = [
@@ -26,9 +27,15 @@
     // ]
 
 	onMount(async () => {
-		const res = await fetch(`http://localhost:5000/list`);
-		machines = await res.json();
-        console.log(machines)
+		// const res = await fetch(`http://localhost:5000/list`);
+		// machines = await res.json();
+        // console.log(machines)
+
+        const records = await pb.collection('machines').getFullList(200 /* batch size */, {
+            sort: '-created',
+        });
+
+        machines = records
 	});
 
     
@@ -85,9 +92,9 @@
         <thead>
             <tr>
             <th>Name</th>
+            <th>OS</th>
             <th>ID</th>
             <!-- <th>IP</th> -->
-            <th>State</th>
             <th>Actions</th>
             </tr>
         </thead>
@@ -96,25 +103,20 @@
             {#each machines as m}
                 <tr>
                     <td>
-                        {m.title}
+                        {m.name}
                     </td>
                     <td>
-                        {m.id}
+                        {m.os}
+                    </td>
+                    <td>
+                        {m.machineID}
                     </td>
                     <!-- <td>
                         {m.ip}
                     </td> -->
-                    <td>
-                        {m.state}
-                    </td> 
-                    <th>
-                        <!-- {#if m.state == "on"} -->
-                            <button on:click={stopMachine(m.id)} class="btn btn-outline btn-warning btn-xs">stop</button>
-                        <!-- {:else} -->
-                            <button on:click={startMachine(m.id)} class="btn btn-outline btn-success btn-xs">start</button>
-                        <!-- {/if} -->
-                        <!-- <button class="mx-5 btn btn-outline btn-error btn-xs">remove</button> -->
-                    </th>
+
+                    <Actions id={m.machineID}/>
+                    
                 </tr>
             {/each}
             
