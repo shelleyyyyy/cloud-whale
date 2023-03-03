@@ -46,4 +46,17 @@ def stop_vm():
     os.popen(command)
     return "done"
 
+@app.route("/createvm", methods=['POST'])
+def create_vm():
+    print(request.json)
+    os_name = request.json['os']
+    name = request.json['name']
+    dir_command = "mkdir /home/cole/VirtualBox\ VMs/{}".format(name)
+    os.system(dir_command)
+    os_command = "VBoxManage export {0} --output /home/cole/VirtualBox\ VMs/{1}/{2}.ova".format(os_name, name, name)
+    os.system(os_command)
+    import_command = "VBoxManage import /home/cole/VirtualBox\ VMs/{0}/{1}.ova".format(name, name)
+    os.system(import_command)
+    return "creating"
+
     
