@@ -1,8 +1,61 @@
 <script>
 
+    import { pb, currentUser } from '../../../lib/pocketbase'
+
+
     let loading = false;
 
     
+    let name = ""
+    let os = ""
+
+
+    const createMachine = async () => {
+
+        loading = true
+
+        console.log(os)
+        console.log(name)
+
+        fetch("http://localhost:5000/startvm", {
+            method: "POST", // or 'PUT'
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer" + pb.authStore.token
+            },
+            body: JSON.stringify({
+                "name": id,
+                "os": os
+            }),
+        })
+        .then((data) => {
+            console.log("Success:", data);
+        })
+        .catch((error) => {
+            console.error("Error:", error);
+        });
+
+        // console.log()
+
+        createMachinePB("machine_ID", name, os)
+
+        loading = false
+
+    }
+
+    const createMachinePB = async (id, name, os) => {
+
+        // example create data
+        const data = {
+            "machineID": id,
+            "name": name,
+            "user": pb.authStore.model.id,
+            "os": os
+        };
+
+        const record = await pb.collection('machines').create(data);
+
+    }
 
 </script>
 
@@ -17,25 +70,24 @@
 
 {:else}
     <div class="grid justify-center gap-5">
-        <div class="grid grid-cols-2 w-96 gap-5">
+        <!-- <div class="grid grid-cols-2 w-96 gap-5"> -->
             <div class="form-control w-full max-w-xs">
                 <!-- svelte-ignore a11y-label-has-associated-control -->
                 <label class="label">
                 <span class="label-text">Machine Name</span>
                 </label>
-                <input type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" />
+                <input bind:value={name} type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" />
             </div>
 
-            <div class="form-control w-full max-w-xs">
-                <!-- svelte-ignore a11y-label-has-associated-control -->
+            <!-- <div class="form-control w-full max-w-xs">
                 <label class="label">
                 <span class="label-text">Root Password</span>
                 </label>
                 <input type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" />
-            </div>
+            </div> -->
 
             
-        </div>
+        <!-- </div> -->
 
         <div class="flex justify-center">
             <div class="form-control w-full max-w-xs">
@@ -43,16 +95,16 @@
                 <label class="label">
                 <span class="label-text">Choose OS</span>
                 </label>
-                <select class="select select-bordered w-full max-w-xs">
+                <select bind:value={os} class="select select-bordered w-full max-w-xs">
                     <option disabled selected>Choose OS</option>
-                    <option>Ubuntu 22.04</option>
+                    <option>LinuxLite</option>
                     <option>Kali</option>
                 </select>
         
             </div>
         </div>
         <div class="flex justify-center p-10">
-            <button on:click={() => (loading = !loading)} class="btn btn-outline btn-success">Submit</button>
+            <button on:click={createMachine} class="btn btn-outline btn-success">Submit</button>
         </div>
     </div>
 {/if}
