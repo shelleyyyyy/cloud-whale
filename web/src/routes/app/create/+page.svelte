@@ -17,14 +17,14 @@
         console.log(os)
         console.log(name)
 
-        fetch("http://localhost:5000/startvm", {
+        fetch("http://localhost:5000/createvm", {
             method: "POST", // or 'PUT'
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": "Bearer" + pb.authStore.token
             },
             body: JSON.stringify({
-                "name": id,
+                "name": name,
                 "os": os
             }),
         })
