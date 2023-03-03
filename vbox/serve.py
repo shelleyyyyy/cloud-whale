@@ -37,6 +37,7 @@ def hello_world():
     return "<p>Hello, World!</p>"
 
 @app.route("/list")
+@token_required
 def list_machines():
     list = os.popen('VBoxManage list vms').read()
     list = ''.join(list.splitlines())
@@ -57,6 +58,7 @@ def list_machines():
     return json.dumps(vms)
 
 @app.route("/startvm", methods=['POST'])
+@token_required
 def start_vm():
     print(request.json['id'])
     id = request.json['id']
@@ -66,6 +68,7 @@ def start_vm():
     return "done"
 
 @app.route("/stopvm", methods=['POST'])
+@token_required
 def stop_vm():
     print(request.json['id'])
     id = request.json['id']
@@ -75,6 +78,7 @@ def stop_vm():
     return "done"
 
 @app.route("/createvm", methods=['POST'])
+@token_required
 def create_vm():
     print(request.json)
     os_name = request.json['os']
