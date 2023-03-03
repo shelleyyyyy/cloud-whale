@@ -70,3 +70,12 @@ def delete_vm():
     delete_command = "VBoxManage unregistervm --delete /home/cole/VirtualBox\ VMs/{1}/{2}.vbox".format(os_name, name, name)
     os.system(delete_command)
     return "deleting"
+
+@app.route("/info", methods=['POST'])
+def get_info():
+    print(request.json)
+    os_name = request.json['os']
+    info_command = "vboxmanage showvminfo {0} | grep -c 'running (since'".format(os_name)
+    if os.system(info_command) == 0:
+        return "off"
+    return "on"
