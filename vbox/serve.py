@@ -3,8 +3,10 @@ import os
 import json
 from flask_cors import CORS
 from functools import wraps
+#from pocketbase import PocketBase 
 
 app = Flask(__name__)
+#cors = CORS(app, resources={r"/*": {"origins": "*"}})
 CORS(app)
 
 def token_required(f):
@@ -21,6 +23,7 @@ def token_required(f):
   
         try:
             print("Check token")
+
             # decoding the payload to fetch the stored details
             #data = jwt.decode(token, app.config['SECRET_KEY'], algorithms=['HS256'])
             #grab data if needed
@@ -91,22 +94,31 @@ def create_vm():
     os.system(os_command)
     import_command = 'VBoxManage import /home/cole/VirtualBox\ VMs/{0}/{1}.ova --vsys 0 --vmname "{2}"'.format(name, name, name)
     os.system(import_command)
-    return "creating"
+
+    #grab the new VM's ID for client
+    info_command = 'VBoxManage showvminfo {}'.format(name)
+    data = os.popen(info_command).read()
+    data = data.split("UUID:")[1]
+    data = data.split("Config file:")[0].strip()
+
+    return json.dumps({"id": data})
 
 @app.route("/deletevm", methods=['POST'])
 def delete_vm():
     print(request.json)
-    os_name = request.json['os']
     name = request.json['name']
-    delete_command = "VBoxManage unregistervm --delete /home/cole/VirtualBox\ VMs/{1}/{2}.vbox".format(os_name, name, name)
+    delete_command = "VBoxManage unregistervm --delete /home/cole/VirtualBox\ VMs/{0}/{1}.vbox".format(name, name)
     os.system(delete_command)
     return "deleting"
 
 @app.route("/info", methods=['POST'])
 def get_info():
     print(request.json)
-    os_name = request.json['os']
-    info_command = "vboxmanage showvminfo {0} | grep -c 'running (since'".format(os_name)
-    if os.system(info_command) == 0:
-        return "off"
-    return "on"
+    id = request.json['id']
+    info_command = "vboxmanage showvminfo {0} | grep -c 'running (since'".format(id)
+    result = os.popen(info_command).read()
+    result = result.strip()
+    print("result", result)
+    if result == '0':
+        return json.dumps("off")
+    return json.dumps("on")

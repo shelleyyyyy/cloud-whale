@@ -6,13 +6,20 @@
     let state = ""
 
     onMount(async () => {
-		// const res = await fetch(`http://localhost:5000/list`);
-		// machines = await res.json();
-        // console.log(machines)
+		const res = await fetch(`http://localhost:5000/info`, {
+            method: "POST", // or 'PUT'
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer" + pb.authStore.token
+            },
+            body: JSON.stringify({
+                "id": id
+            }),
+        });
+		state = await res.json();
+        console.log(state)
 
         console.log(pb.authStore.token)
-        
-        state = "on"
 	});
 
     const startMachine = async (id) => {
@@ -50,6 +57,26 @@
         .then((data) => {
             console.log("Success:", data);
             state = "off"
+        })
+        .catch((error) => {
+            console.error("Error:", error);
+        });
+
+    }
+
+    const removeMachine = async (name) => {
+        fetch("http://localhost:5000/deletevm", {
+            method: "POST", // or 'PUT'
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer" + pb.authStore.token
+            },
+            body: JSON.stringify({
+                "name": name
+            }),
+        })
+        .then((data) => {
+            console.log("Success:", data);
         })
         .catch((error) => {
             console.error("Error:", error);

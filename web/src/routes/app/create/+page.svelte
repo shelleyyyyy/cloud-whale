@@ -17,7 +17,7 @@
         console.log(os)
         console.log(name)
 
-        fetch("http://localhost:5000/createvm", {
+        await fetch("http://localhost:5000/createvm", {
             method: "POST", // or 'PUT'
             headers: {
                 "Content-Type": "application/json",
@@ -28,16 +28,19 @@
                 "os": os
             }),
         })
+        .then((response) => {
+            return response.json()
+            
+        })
         .then((data) => {
             console.log("Success:", data);
+            createMachinePB(data.id, name, os)
         })
         .catch((error) => {
             console.error("Error:", error);
         });
 
         // console.log()
-
-        createMachinePB("machine_ID", name, os)
 
         loading = false
 
