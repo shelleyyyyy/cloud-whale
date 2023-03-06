@@ -2,6 +2,7 @@
     import { onMount } from 'svelte'
     import { pb } from './pocketbase'
     export let id;
+    export let name;
     export let recordID;
 
     let state = ""
@@ -102,5 +103,5 @@
         <button on:click={startMachine(id)} class="btn btn-outline btn-success btn-xs">start</button>
     {/if}
     
-    <button on:click={() => removeMachine("test")} class="mx-5 btn btn-outline btn-error btn-xs">remove</button>
+    <button on:click={() => removeMachine(name)} class="mx-5 btn btn-outline btn-error btn-xs">remove</button>
 </th>

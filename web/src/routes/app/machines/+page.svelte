@@ -119,7 +119,7 @@
                         {m.ip}
                     </td> -->
 
-                    <Actions recordID={m.id} id={m.machineID}/>
+                    <Actions recordID={m.id} id={m.machineID} name={m.name}/>
                     
                 </tr>
             {/each}
