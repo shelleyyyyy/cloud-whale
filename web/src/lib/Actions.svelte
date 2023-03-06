@@ -2,6 +2,8 @@
     import { onMount } from 'svelte'
     import { pb } from './pocketbase'
     export let id;
+    export let name;
+    export let recordID;
 
     let state = ""
 
@@ -17,9 +19,9 @@
             }),
         });
 		state = await res.json();
-        console.log(state)
+        // console.log(state)
 
-        console.log(pb.authStore.token)
+        // console.log(pb.authStore.token)
 	});
 
     const startMachine = async (id) => {
@@ -34,7 +36,7 @@
             }),
         })
         .then((data) => {
-            console.log("Success:", data);
+            // console.log("Success:", data);
             state = "on"
         })
         .catch((error) => {
@@ -55,7 +57,7 @@
             }),
         })
         .then((data) => {
-            console.log("Success:", data);
+            // console.log("Success:", data);
             state = "off"
         })
         .catch((error) => {
@@ -65,6 +67,11 @@
     }
 
     const removeMachine = async (name) => {
+        // console.log("REACHED")
+        // console.log(recordID)
+
+        await pb.collection('machines').delete(recordID);
+
         fetch("http://localhost:5000/deletevm", {
             method: "POST", // or 'PUT'
             headers: {
@@ -82,6 +89,8 @@
             console.error("Error:", error);
         });
 
+
+
     }
 
 </script>
@@ -94,5 +103,5 @@
         <button on:click={startMachine(id)} class="btn btn-outline btn-success btn-xs">start</button>
     {/if}
     
-    <button class="mx-5 btn btn-outline btn-error btn-xs">remove</button>
+    <button on:click={() => removeMachine(name)} class="mx-5 btn btn-outline btn-error btn-xs">remove</button>
 </th>
