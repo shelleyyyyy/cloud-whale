@@ -2,6 +2,8 @@
     import { goto } from "$app/navigation";
     import { pb } from "$lib/pocketbase.js"
 
+    import logo from '$lib/cloudWhaleLogo.png'
+
     const logout = () => {
         pb.authStore.clear()
 
@@ -13,7 +15,8 @@
 
 <div class="navbar bg-base-100">
     <div class="flex-1">
-        <a class="btn btn-ghost normal-case text-xl" href="/app">Whale Cloud</a>
+        <img src={"/cloudWhaleLogo.png"} alt="logo" class="w-20"/>
+        <a class="btn btn-ghost normal-case text-xl" href="/app">Cloud Whale</a>
     </div>
     <div class="flex-none">
         <ul class="menu menu-horizontal px-1">
