@@ -36,6 +36,10 @@
         });
 
         machines = records
+
+        pb.collection('machines').subscribe('*', function (e) {
+            machines = machines.filter((m) => m.id !== e.record.id);
+        });
 	});
 
     
@@ -51,7 +55,7 @@
             }),
         })
         .then((data) => {
-            console.log("Success:", data);
+            // console.log("Success:", data);
         })
         .catch((error) => {
             console.error("Error:", error);
@@ -115,7 +119,7 @@
                         {m.ip}
                     </td> -->
 
-                    <Actions id={m.machineID}/>
+                    <Actions recordID={m.id} id={m.machineID}/>
                     
                 </tr>
             {/each}

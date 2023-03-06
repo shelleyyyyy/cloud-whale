@@ -14,8 +14,8 @@
 
         loading = true
 
-        console.log(os)
-        console.log(name)
+        // console.log(os)
+        // console.log(name)
 
         await fetch("http://localhost:5000/createvm", {
             method: "POST", // or 'PUT'
