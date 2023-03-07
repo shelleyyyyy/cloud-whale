@@ -8,7 +8,7 @@
     let state = ""
 
     onMount(async () => {
-		const res = await fetch(`http://localhost:5000/info`, {
+		const res = await fetch(`http://10.4.3.62:5000/info`, {
             method: "POST", // or 'PUT'
             headers: {
                 "Content-Type": "application/json",
@@ -25,7 +25,7 @@
 	});
 
     const startMachine = async (id) => {
-        fetch("http://localhost:5000/startvm", {
+        fetch("http://10.4.3.62:5000/startvm", {
             method: "POST", // or 'PUT'
             headers: {
                 "Content-Type": "application/json",
@@ -46,7 +46,7 @@
     }
 
     const stopMachine = async (id) => {
-        fetch("http://localhost:5000/stopvm", {
+        fetch("http://10.4.3.62:5000/stopvm", {
             method: "POST", // or 'PUT'
             headers: {
                 "Content-Type": "application/json",
@@ -72,7 +72,7 @@
 
         await pb.collection('machines').delete(recordID);
 
-        fetch("http://localhost:5000/deletevm", {
+        fetch("http://10.4.3.62:5000/deletevm", {
             method: "POST", // or 'PUT'
             headers: {
                 "Content-Type": "application/json",
