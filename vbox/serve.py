@@ -1,5 +1,6 @@
 from flask import Flask, request
 import os
+import time
 import json
 from flask_cors import CORS
 from functools import wraps
@@ -95,13 +96,29 @@ def create_vm():
     import_command = 'VBoxManage import /home/cole/VirtualBox\ VMs/{0}/{1}.ova --vsys 0 --vmname "{2}"'.format(name, name, name)
     os.system(import_command)
 
+    #boot vm once and grab IP
+    command = "vboxmanage startvm {0} --type headless".format(name)
+    print(command)
+    os.popen(command)
+
+    time.sleep(90)
+    ip_command = "VBoxManage guestproperty enumerate {0}".format(name)
+    ip = os.popen(ip_command).read()
+    ip = ip.split("Name: /VirtualBox/GuestInfo/Net/0/V4/IP, value: ")[1]
+    ip = ip.split(",")[0].strip()
+    print(ip)
+
+    command = "vboxmanage controlvm {0} poweroff".format(name)
+    print(command)
+    os.popen(command)
+
     #grab the new VM's ID for client
     info_command = 'VBoxManage showvminfo {}'.format(name)
     data = os.popen(info_command).read()
     data = data.split("UUID:")[1]
     data = data.split("Config file:")[0].strip()
 
-    return json.dumps({"id": data})
+    return json.dumps({"id": data, "ip": ip})
 
 @app.route("/deletevm", methods=['POST'])
 def delete_vm():
