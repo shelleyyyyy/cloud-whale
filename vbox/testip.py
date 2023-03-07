@@ -1,0 +1,1 @@
+VBoxManage guestproperty enumerate <vmname>
