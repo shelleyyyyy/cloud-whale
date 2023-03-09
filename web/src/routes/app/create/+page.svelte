@@ -17,7 +17,7 @@
         // console.log(os)
         // console.log(name)
 
-        await fetch("http://10.4.3.62:5000/createvm", {
+        await fetch("http://localhost:5000/createvm", {
             method: "POST", // or 'PUT'
             headers: {
                 "Content-Type": "application/json",
@@ -34,7 +34,7 @@
         })
         .then((data) => {
             console.log("Success:", data);
-            createMachinePB(data.id, name, os)
+            createMachinePB(data.id, data.ip, name, os)
         })
         .catch((error) => {
             console.error("Error:", error);
@@ -46,14 +46,15 @@
 
     }
 
-    const createMachinePB = async (id, name, os) => {
+    const createMachinePB = async (id, ip, name, os) => {
 
         // example create data
         const data = {
             "machineID": id,
             "name": name,
             "user": pb.authStore.model.id,
-            "os": os
+            "os": os,
+            "ip": ip
         };
 
         const record = await pb.collection('machines').create(data);

@@ -98,7 +98,7 @@
             <th>Name</th>
             <th>OS</th>
             <th>ID</th>
-            <!-- <th>IP</th> -->
+            <th>IP</th>
             <th>Actions</th>
             </tr>
         </thead>
@@ -115,9 +115,9 @@
                     <td>
                         {m.machineID}
                     </td>
-                    <!-- <td>
+                    <td>
                         {m.ip}
-                    </td> -->
+                    </td>
 
                     <Actions recordID={m.id} id={m.machineID} name={m.name}/>
                     
