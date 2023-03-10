@@ -1,0 +1,45 @@
+<mxfile host="65bd71144e">
+    <diagram id="ESvmzmNNvWDNARoAMb1K" name="Page-1">
+        <mxGraphModel dx="1475" dy="893" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="12" style="edgeStyle=none;html=1;" edge="1" parent="1" source="3" target="5">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="3" value="Svelte.js Frontend" style="whiteSpace=wrap;html=1;fillColor=#60a917;fontColor=#ffffff;strokeColor=#2D7600;" vertex="1" parent="1">
+                    <mxGeometry x="160" y="330" width="180" height="110" as="geometry"/>
+                </mxCell>
+                <mxCell id="4" value="Database" style="whiteSpace=wrap;html=1;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;" vertex="1" parent="1">
+                    <mxGeometry x="160" y="70" width="180" height="110" as="geometry"/>
+                </mxCell>
+                <mxCell id="5" value="Virtual Box Flask Endpoints" style="whiteSpace=wrap;html=1;fillColor=#0050ef;fontColor=#ffffff;strokeColor=#001DBC;" vertex="1" parent="1">
+                    <mxGeometry x="550" y="330" width="180" height="110" as="geometry"/>
+                </mxCell>
+                <mxCell id="8" value="" style="edgeStyle=none;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.098;entryY=1.009;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.102;exitY=-0.019;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="3" target="4">
+                    <mxGeometry width="80" relative="1" as="geometry">
+                        <mxPoint x="410" y="280" as="sourcePoint"/>
+                        <mxPoint x="490" y="280" as="targetPoint"/>
+                        <Array as="points"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="9" value="Sign in" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="100" y="240" width="60" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="10" value="" style="edgeStyle=none;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.773;entryY=-0.025;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.78;exitY=0.989;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="4" target="3">
+                    <mxGeometry width="80" relative="1" as="geometry">
+                        <mxPoint x="210.72000000000003" y="346.9200000000001" as="sourcePoint"/>
+                        <mxPoint x="210" y="200" as="targetPoint"/>
+                        <Array as="points"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="11" value="Session Token" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="310" y="240" width="60" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="13" value="&lt;br&gt;Access Machines With Token" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="390" y="340" width="120" height="30" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

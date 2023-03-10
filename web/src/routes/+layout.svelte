@@ -6,7 +6,7 @@
 
   onMount(() => {
     if (pb.authStore.isValid) {
-      goto("/app");
+    //   goto("/app/machines");
     } else {
       goto("/login");
     }
