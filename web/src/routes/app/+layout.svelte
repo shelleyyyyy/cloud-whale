@@ -15,7 +15,7 @@
 
 <div class="navbar bg-base-100">
     <div class="flex-1">
-        <img src={"/cloudWhaleLogo.png"} alt="logo" class="w-20"/>
+        <img src={logo} alt="logo" class="w-20"/>
         <a class="btn btn-ghost normal-case text-xl" href="/app">Cloud Whale</a>
     </div>
     <div class="flex-none">
