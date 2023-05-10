@@ -1,22 +1,18 @@
-# create-svelte
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+# Start Web Interface
 
-## Creating a project
-
-If you're seeing this, you've probably already done this step. Congrats!
+## make sure you are in the web directory
 
 ```bash
-# create a new project in the current directory
-npm create svelte@latest
+cd web
+```
+## then install dependencies
 
-# create a new project in my-app
-npm create svelte@latest my-app
+```bash
+npm install
 ```
 
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+## then run the development server
 
 ```bash
 npm run dev
@@ -25,14 +21,12 @@ npm run dev
 npm run dev -- --open
 ```
 
-## Building
+## Configure your virtual machines
 
-To create a production version of your app:
+Nex thing you need to configure your virtual machines with this file
 
 ```bash
-npm run build
+web/src/lib/machines.json
 ```
 
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+the machine names that you put in this file must be the exact names of the virtual machine files that you have stored.
