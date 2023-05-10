@@ -8,7 +8,7 @@
 
 <div class="flex">
     <div class="flex justify-center w-full">
-        <img src={"/cloudWhaleLogo.png"} alt="logo"/>
+        <img src={logo} alt="logo"/>
     </div>
     
     <div class="flex items-center">
