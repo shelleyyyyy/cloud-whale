@@ -1,7 +1,7 @@
 <script>
 
     import { pb, currentUser } from '../../../lib/pocketbase'
-
+    import machines from '$lib/machines.json'
 
     let loading = false;
 
@@ -74,7 +74,6 @@
 
 {:else}
     <div class="grid justify-center gap-5">
-        <!-- <div class="grid grid-cols-2 w-96 gap-5"> -->
             <div class="form-control w-full max-w-xs">
                 <!-- svelte-ignore a11y-label-has-associated-control -->
                 <label class="label">
@@ -82,16 +81,6 @@
                 </label>
                 <input bind:value={name} type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" />
             </div>
-
-            <!-- <div class="form-control w-full max-w-xs">
-                <label class="label">
-                <span class="label-text">Root Password</span>
-                </label>
-                <input type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" />
-            </div> -->
-
-            
-        <!-- </div> -->
 
         <div class="flex justify-center">
             <div class="form-control w-full max-w-xs">
@@ -101,8 +90,9 @@
                 </label>
                 <select bind:value={os} class="select select-bordered w-full max-w-xs">
                     <option disabled selected>Choose OS</option>
-                    <option>LinuxLite</option>
-                    <option>Kali</option>
+                    {#each machines.machines as machine}
+                        <option>{machine}</option>    
+                    {/each}
                 </select>
         
             </div>
